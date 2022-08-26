@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include "functions.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <math.h>
+
+#include "functions.h"
 
 
 void Input (double * a, double * b, double * c)

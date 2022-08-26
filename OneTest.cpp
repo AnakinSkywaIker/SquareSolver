@@ -1,8 +1,13 @@
-#include "functions.h"
 #include <assert.h>
-#include <TXLib.h>
 #include <stdlib.h>
 
+#include <TXLib.h>
+
+#include "functions.h"
+
+#define RedConsole   txSetConsoleAttr(FOREGROUND_RED)
+#define WhiteConsole txSetConsoleAttr(FOREGROUND_WHITE)
+#define GreenConsole txSetConsoleAttr(FOREGROUND_GREEN)
 
 int OneTest(const double a, const double b, const double c, const int num_roots,
     double * x1, double * x2, const double rightx1, const double rightx2)
@@ -43,9 +48,9 @@ int OneTest(const double a, const double b, const double c, const int num_roots,
         else
             return 0;
     default:
-        txSetConsoleAttr(FOREGROUND_RED);
+        RedConsole;
         printf("Smth wrong with test data file or OneTest function\n");
-        txSetConsoleAttr(FOREGROUND_WHITE);
+        WhiteConsole;
         return 0;
     }
 }

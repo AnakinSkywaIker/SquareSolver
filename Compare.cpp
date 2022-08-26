@@ -1,6 +1,7 @@
-#include "functions.h"
 #include <assert.h>
 #include <math.h>
+
+#include "functions.h"
 
 int Compare (const double n1, const double n2)
 {

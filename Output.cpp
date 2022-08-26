@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include "functions.h"
 #include <assert.h>
 #include <math.h>
+
+#include "functions.h"
 
 void Output (const int num_roots, const double x1, const double x2)
 {

@@ -1,7 +1,6 @@
 #include <assert.h>
 #include <math.h>
 
-
 double Calculate_discriminant (const double a, const double b, const double c)
 {
     assert (isfinite (a));

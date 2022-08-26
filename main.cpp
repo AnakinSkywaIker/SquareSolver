@@ -2,11 +2,9 @@
 #include <math.h>
 #include <assert.h>
 #include <stdlib.h>
-#include <TXLib.h>
+
 #include "functions.h"
-// #define TEST_MODE 1        //Comment this to use program in usual mode
-
-
+//#define TEST_MODE true        //Uncomment this to use program in test mode
 
 int main (void)
 {
@@ -18,6 +16,7 @@ int main (void)
         printf("Test mode:\n");
         SquareEquationTest();
     #else
+
         double a  = 0;
         double b  = 0;
         double c  = 0;
@@ -27,6 +26,8 @@ int main (void)
         Input (&a, &b, &c);
         int num_roots =  Square_solver (a, b, c, &x1, &x2);
         Output (num_roots, x1, x2);
+
     #endif
+
         return 0;
 }

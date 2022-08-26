@@ -1,8 +1,8 @@
-#include "functions.h"
 #include <math.h>
 #include <assert.h>
 #include <stdlib.h>
 
+#include "functions.h"
 
 int Square_solver (const double a, const double b, const double c, double * x1, double * x2)
 {
@@ -35,7 +35,6 @@ int Square_solver (const double a, const double b, const double c, double * x1, 
     }
 
     double d = Calculate_discriminant (a, b, c);
-
     if ((Compare (d, 0) == C_MORE))
     {
         *x1 = (-b - sqrt (d)) / (2 * a);

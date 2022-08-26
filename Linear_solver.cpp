@@ -1,9 +1,8 @@
-#include "functions.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <math.h>
 
-
+#include "functions.h"
 
 int Linear_solver (const double k, const double b, double * x1)
 {
