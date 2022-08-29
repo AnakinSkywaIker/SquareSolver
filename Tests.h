@@ -5,15 +5,15 @@
 void SquareEquationTest(const char * name_test_file);
 
 /**
-@brief Used to do one iteration of test file
-@param[in] coefficient a
-@param[in] coefficient b
-@param[in] coefficient c
-@param[in] number of roots
-@param[out] calculated first root
-@param[out] calculated second root
-@param[in] first root from file with tests
-@param[in] second root from file with tests
+@brief Used to do one iteration of test
+@param[in] coefficient a of square equation
+@param[in] coefficient b of square equation
+@param[in] coefficient c of square equation
+@param[in] number of roots of square equation
+@param[out] calculated first  root of square equation
+@param[out] calculated second root of square equation
+@param[in] first  root of equation from file with tests
+@param[in] second root of equation from file with tests
 @return result of test: true if test ok, false if test error
 */
 int OneTest(const double a, const double b, const double c, const int num_roots,
