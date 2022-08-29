@@ -13,23 +13,23 @@
 
 const int Maxline = 40;
 
-void SquareEquationTest(void)
+void SquareEquationTest(const char * name_test_file)
 {
-    double a  = 0;
-    double b  = 0;
-    double c  = 0;
-    double x1 = 0;
-    double x2 = 0;
+    double a  = NAN;
+    double b  = NAN;
+    double c  = NAN;
+    double x1 = NAN;
+    double x2 = NAN;
 
-    double rightx1 = 0;
-    double rightx2 = 0;
+    double right_x1 = NAN;
+    double right_x2 = NAN;
 
-    int num_roots = 0;
+    int num_roots = NAN;
     int right_tests = 0;
     int count_tests = 0;
     bool flag_test = false;
 
-    FILE * test_data = fopen ("SquareEquationTestData.txt", "r");
+    FILE * test_data = fopen (name_test_file, "r");
     if (test_data == NULL)
     {
         RedConsole;
@@ -39,13 +39,13 @@ void SquareEquationTest(void)
         return;
     }
 
-    char line[40] = "";
+    char line[Maxline] = "";
     int num_cymbols = 0;
     while (fgets (line, Maxline, test_data) != NULL)
     {
         count_tests++;
         num_cymbols = sscanf(line, "%lg %lg %lg %d %lg %lg",
-                                &a, &b, &c, &num_roots, &rightx1, &rightx2);
+                                &a, &b, &c, &num_roots, &right_x1, &right_x2);
         x1 = 0;
         x2 = 0;
 
@@ -58,7 +58,7 @@ void SquareEquationTest(void)
             continue;
         }
 
-        flag_test = OneTest(a, b, c, num_roots, &x1, &x2, rightx1, rightx2);
+        flag_test = OneTest(a, b, c, num_roots, &x1, &x2, right_x1, right_x2);
         right_tests += flag_test;
         if (flag_test)
         {
@@ -73,7 +73,7 @@ void SquareEquationTest(void)
             WhiteConsole;
             printf("a = %lg, b = %lg, c = %lg, num of roots = %d\n", a, b, c, num_roots);
             printf( "Expected roots: x1 = %lg, x2 = %lg, Your roots: x1 = %lg, x2 = %lg\n",
-                   rightx1, rightx2, x1, x2);
+                   right_x1, right_x2, x1, x2);
         }
     }
 
@@ -82,14 +82,13 @@ void SquareEquationTest(void)
     fclose(test_data);
 }
 
+
 int OneTest(const double a, const double b, const double c, const int num_roots,
     double * x1, double * x2, const double rightx1, const double rightx2)
 {
     assert (isfinite (a));
     assert (isfinite (b));
     assert (isfinite (c));
-    assert (isfinite (rightx1));
-    assert (isfinite (rightx2));
     assert (x1 != NULL);
     assert (x2 != NULL);
     assert (x1 != x2);

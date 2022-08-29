@@ -5,6 +5,7 @@
 
 #include "Calculations.h"
 #include "Terminal.h"
+#include "Tests.h"
 
 void Input (double * a, double * b, double * c)
 {
@@ -24,8 +25,6 @@ void Input (double * a, double * b, double * c)
 
 void Output (const int num_roots, const double x1, const double x2)
 {
-    assert (isfinite (x1));
-    assert (isfinite (x2));
 
     switch (num_roots)
     {
@@ -60,4 +59,33 @@ void CleanBuffer()
 {
     while (getchar () != '\n')
             continue;
+}
+
+
+
+void TestCalcSwitch(int argc, const char* argv[])
+{
+    switch (argc)
+    {
+    case 1:
+    {
+        double a  = NAN;
+        double b  = NAN;
+        double c  = NAN;
+        double x1 = NAN;
+        double x2 = NAN;
+
+        Input (&a, &b, &c);
+        int num_roots =  Square_solver (a, b, c, &x1, &x2);
+        Output (num_roots, x1, x2);
+        break;
+    }
+    case 2:
+        printf("Test mode:\n");
+        SquareEquationTest(argv[1]);
+        break;
+
+    default:
+        printf("Something wrong with command line args\n");
+    }
 }

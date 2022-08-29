@@ -1,7 +1,8 @@
 /**
 @brief Used to test program solving square equation using test data from file
+@param[in] name of file with tests
 */
-void SquareEquationTest(void);
+void SquareEquationTest(const char * name_test_file);
 
 /**
 @brief Used to do one iteration of test file

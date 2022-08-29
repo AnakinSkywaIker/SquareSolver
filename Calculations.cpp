@@ -26,7 +26,7 @@ int Square_solver (const double a, const double b, const double c, double * x1, 
             return ONE_ROOT;
         }
 
-        if (-c / a > 0)
+        if (Compare (-c / a, 0) == C_MORE)
         {
             double sqr_ca = sqrt (-c / a);
             *x1 =  sqr_ca;
@@ -71,6 +71,7 @@ int Linear_solver (const double k, const double b, double * x1)
     }
 
     *x1 = -b / k;
+
     return ONE_ROOT;
 }
 

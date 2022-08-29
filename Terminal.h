@@ -20,3 +20,6 @@ void Output (const int num_roots, const double x1, const double x2);
 */
 void CleanBuffer(void);
 
+void TestCalcSwitch(int argc, const char* argv[]);
+
+

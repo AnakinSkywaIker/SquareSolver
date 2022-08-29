@@ -10,26 +10,10 @@
 
 int main (int argc, const char* argv[])
 {
-
     printf ("Square equation solver\n");
     printf ("a*x^2 + b*x + c = 0\n");
 
-    #ifdef TEST_MODE
-        printf("Test mode:\n");
-        SquareEquationTest();
-    #else
+    TestCalcSwitch(argc, argv);
 
-        double a  = 0;
-        double b  = 0;
-        double c  = 0;
-        double x1 = 0;
-        double x2 = 0;
-
-        Input (&a, &b, &c);
-        int num_roots =  Square_solver (a, b, c, &x1, &x2);
-        Output (num_roots, x1, x2);
-
-    #endif
-
-        return 0;
+    return 0;
 }
