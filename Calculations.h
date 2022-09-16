@@ -16,7 +16,7 @@
 #define GREENCONSOLE txSetConsoleAttr(FOREGROUND_GREEN)
 
 /**
-@brief Used to solve square equation of the form /f$(a * x^2)/f$ + bx + c = 0
+@brief Used to solve square equation of the form a * x^2 + bx + c = 0
 @param[in] coefficient a of square equation
 @param[in] coefficient b of square equation
 @param[in] coefficient c of square equation
