@@ -1,13 +1,6 @@
-#include <stdio.h>
-#include <assert.h>
-#include <stdlib.h>
-#include <math.h>
-
 #include "Calculations.h"
-#include "Terminal.h"
-#include "Tests.h"
 
-void Input (double * a, double * b, double * c)
+void Input (double *a, double *b, double *c)
 {
     assert (a != NULL);
     assert (b != NULL);
@@ -21,7 +14,6 @@ void Input (double * a, double * b, double * c)
         CleanBuffer();
     }
 }
-
 
 void Output (const int num_roots, const double x1, const double x2)
 {
@@ -47,45 +39,52 @@ void Output (const int num_roots, const double x1, const double x2)
         break;
 
     case WRONG:
-        printf ("Something wrong with roots\n");
+        REDCONSOLE;
+        printf ("Error with number roots, in function Square_solver\n");
+        WHITECONSOLE;
         break;
 
     default:
-        assert (0 && "Something wrong with roots and output\n");
+        REDCONSOLE;
+        printf ("Error with number of roots in function Output. Got: %d\n", num_roots);
+        WHITECONSOLE;
+        assert (0);
     }
 }
 
 void CleanBuffer()
 {
-    while (getchar () != '\n')
-            continue;
+    while (getchar () != '\n') {};
 }
 
-
-
-void TestCalcSwitch(int argc, const char* argv[])
+void SwitchTestOrCalc(int argc, const char *argv[])
 {
     switch (argc)
     {
-    case 1:
-    {
-        double a  = NAN;
-        double b  = NAN;
-        double c  = NAN;
-        double x1 = NAN;
-        double x2 = NAN;
+        case 1:
+        {
+            double a  = NAN;
+            double b  = NAN;
+            double c  = NAN;
+            double x1 = NAN;
+            double x2 = NAN;
 
-        Input (&a, &b, &c);
-        int num_roots =  Square_solver (a, b, c, &x1, &x2);
-        Output (num_roots, x1, x2);
-        break;
-    }
-    case 2:
-        printf("Test mode:\n");
-        SquareEquationTest(argv[1]);
-        break;
-
-    default:
-        printf("Something wrong with command line args\n");
+            Input (&a, &b, &c);
+            int num_roots =  Square_solver (a, b, c, &x1, &x2);
+            Output (num_roots, x1, x2);
+            break;
+        }
+        case 2:
+        {
+            printf("Test mode:\n");
+            SquareEquationTest(argv[1]);
+            break;
+        }
+        default:
+        {
+            REDCONSOLE;
+            printf("Error unexpected num of args. expected <= 1. GOT: %d\n", argc);
+            WHITECONSOLE;
+        }
     }
 }

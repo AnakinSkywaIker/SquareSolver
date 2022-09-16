@@ -1,5 +1,22 @@
+#ifndef CALCULATIONS
+#define CALCULATIONS
+
+#include <TXLib.h>
+
+#include <stdio.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "Tests.h"
+#include "Terminal.h"
+
+#define REDCONSOLE   txSetConsoleAttr(FOREGROUND_RED)
+#define WHITECONSOLE txSetConsoleAttr(FOREGROUND_WHITE)
+#define GREENCONSOLE txSetConsoleAttr(FOREGROUND_GREEN)
+
 /**
-@brief Used to solve square equation of the form ax^2 + bx + c = 0
+@brief Used to solve square equation of the form /f$(a * x^2)/f$ + bx + c = 0
 @param[in] coefficient a of square equation
 @param[in] coefficient b of square equation
 @param[in] coefficient c of square equation
@@ -19,7 +36,7 @@ int Square_solver (const double a, const double b, const double c, double *x1, d
 int Linear_solver (const double k, const double b, double *x);
 
 /**
-@brief Used to calculate discriminant of equation of the form ax^2 + bx + c = 0
+@brief Used to calculate discriminant of equation of the form /f$(a * x^2)/f$ + bx + c = 0
 @param[in] coefficient a of square equation
 @param[in] coefficient b of square equation
 @param[in] coefficient c of square equation
@@ -54,3 +71,5 @@ enum roots {
     TWO_ROOTS  = 2,     /// <is assigned the value 2 to two roots
     WRONG      = 7      /// <is assigned the value 7 to something wrong
 };
+
+#endif //Calculations.h

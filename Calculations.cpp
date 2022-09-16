@@ -1,12 +1,8 @@
-#include <math.h>
-#include <assert.h>
-#include <stdlib.h>
-
 #include "Calculations.h"
 
 const long double EPSILON = 1e-3;
 
-int Square_solver (const double a, const double b, const double c, double * x1, double * x2)
+int Square_solver (const double a, const double b, const double c, double *x1, double *x2)
 {
     assert (isfinite (a));
     assert (isfinite (b));
@@ -16,7 +12,9 @@ int Square_solver (const double a, const double b, const double c, double * x1, 
     assert (x1 != x2);
 
     if (Compare (a, 0) == C_EQUAL)                  // a == 0
+    {
         return Linear_solver (b, c, x1);
+    }
 
     if (Compare (b, 0) == C_EQUAL)                  // b == 0
     {
@@ -34,7 +32,9 @@ int Square_solver (const double a, const double b, const double c, double * x1, 
             return TWO_ROOTS;
         }
         else
+        {
             return ZERO_ROOTS;
+        }
     }
 
     double d = Calculate_discriminant (a, b, c);
@@ -51,13 +51,14 @@ int Square_solver (const double a, const double b, const double c, double * x1, 
         return ONE_ROOT;
     }
     else
+    {
         return ZERO_ROOTS;
+    }
 
-  return WRONG;
+    return WRONG;
 }
 
-
-int Linear_solver (const double k, const double b, double * x1)
+int Linear_solver (const double k, const double b, double *x1)
 {
     assert (isfinite (k));
     assert (isfinite (b));
@@ -66,7 +67,9 @@ int Linear_solver (const double k, const double b, double * x1)
     if (Compare (k, 0) == C_EQUAL)
     {
         if (Compare (b, 0) == C_EQUAL)
+        {
             return INF_ROOTS;
+        }
         return ZERO_ROOTS;
     }
 
@@ -85,17 +88,22 @@ double Calculate_discriminant (const double a, const double b, const double c)
     return b*b - 4*a*c;
 }
 
-
 int Compare (const double n1, const double n2)
 {
     assert (isfinite (n1));
     assert (isfinite (n2));
 
     if (fabs (n1 - n2) < EPSILON)
+    {
         return C_EQUAL;
+    }
     else if (n1 - n2 > EPSILON)
+    {
         return C_MORE;
+    }
     else
+    {
         return C_LESS;
+    }
 }
 

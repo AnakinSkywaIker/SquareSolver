@@ -1,19 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-
-#include <TXLib.h>
-
 #include "Calculations.h"
-#include "Tests.h"
 
-#define RedConsole   txSetConsoleAttr(FOREGROUND_RED)
-#define WhiteConsole txSetConsoleAttr(FOREGROUND_WHITE)
-#define GreenConsole txSetConsoleAttr(FOREGROUND_GREEN)
+static const int Maxline = 40;
 
-const int Maxline = 40;
-
-void SquareEquationTest(const char * name_test_file)
+void SquareEquationTest(const char *name_test_file)
 {
     double a  = NAN;
     double b  = NAN;
@@ -24,17 +13,17 @@ void SquareEquationTest(const char * name_test_file)
     double right_x1 = NAN;
     double right_x2 = NAN;
 
-    int num_roots = NAN;
+    int num_roots   = 0;
     int right_tests = 0;
     int count_tests = 0;
-    bool flag_test = false;
+    bool flag_test  = false;
 
-    FILE * test_data = fopen (name_test_file, "r");
+    FILE *test_data = fopen (name_test_file, "r");
     if (test_data == NULL)
     {
-        RedConsole;
+        REDCONSOLE;
         printf("Error: ");
-        WhiteConsole;
+        WHITECONSOLE;
         printf("can not open file with data\n");
         return;
     }
@@ -44,6 +33,7 @@ void SquareEquationTest(const char * name_test_file)
     while (fgets (line, Maxline, test_data) != NULL)
     {
         count_tests++;
+        //char sep = 0;
         num_cymbols = sscanf(line, "%lg %lg %lg %d %lg %lg",
                                 &a, &b, &c, &num_roots, &right_x1, &right_x2);
         x1 = 0;
@@ -51,26 +41,37 @@ void SquareEquationTest(const char * name_test_file)
 
         if (num_cymbols < 3 || (num_cymbols != 4 + num_roots && !(num_roots == INF_ROOTS)))
         {
-            RedConsole;
+            REDCONSOLE;
             printf("Error: ");
-            WhiteConsole;
+            WHITECONSOLE;
             printf("wrong data in SquareEquationTestData.txt\n");
             continue;
         }
 
-        flag_test = OneTest(a, b, c, num_roots, &x1, &x2, right_x1, right_x2);
+        TestData DataForTest = {};
+
+        DataForTest.a         = a;
+        DataForTest.b         = b;
+        DataForTest.c         = c;
+        DataForTest.num_roots = num_roots;
+        DataForTest.x1        = &x1;
+        DataForTest.x2        = &x2;
+        DataForTest.rightx1   = right_x1;
+        DataForTest.rightx2   = right_x2;
+
+        flag_test = OneTest(&DataForTest);
         right_tests += flag_test;
         if (flag_test)
         {
-            GreenConsole;
+            GREENCONSOLE;
             printf("Test OK\n");
-            WhiteConsole;
+            WHITECONSOLE;
         }
         else
         {
-            RedConsole;
+            REDCONSOLE;
             printf("Test error: ");
-            WhiteConsole;
+            WHITECONSOLE;
             printf("a = %lg, b = %lg, c = %lg, num of roots = %d\n", a, b, c, num_roots);
             printf( "Expected roots: x1 = %lg, x2 = %lg, Your roots: x1 = %lg, x2 = %lg\n",
                    right_x1, right_x2, x1, x2);
@@ -83,9 +84,18 @@ void SquareEquationTest(const char * name_test_file)
 }
 
 
-int OneTest(const double a, const double b, const double c, const int num_roots,
-    double * x1, double * x2, const double rightx1, const double rightx2)
+int OneTest(TestData *DataForTest)
 {
+    double a         = (*DataForTest).a;
+    double b         = (*DataForTest).b;
+    double c         = (*DataForTest).c;
+    int    num_roots = (*DataForTest).num_roots;
+    double *x1       = (*DataForTest).x1;
+    double *x2       = (*DataForTest).x2;
+    double rightx1   = (*DataForTest).rightx1;
+    double rightx2   = (*DataForTest).rightx2;
+
+
     assert (isfinite (a));
     assert (isfinite (b));
     assert (isfinite (c));
@@ -114,9 +124,9 @@ int OneTest(const double a, const double b, const double c, const int num_roots,
         return (calc_num_roots == INF_ROOTS);
 
     default:
-        RedConsole;
-        printf("Smth wrong with test data file or OneTest function\n");
-        WhiteConsole;
+        REDCONSOLE;
+        printf("Error: wrong number of roots in function OneTest, GOT: %d\n", num_roots);
+        WHITECONSOLE;
         return 0;
     }
 }
